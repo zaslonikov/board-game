@@ -1,10 +1,11 @@
 import {FC, useState} from "react";
 import {difficultNames} from "./parse-difficult";
+import {DifficultType} from "../constants/TYPES";
 
 type Props = {
-  selected: string;
-  setSelected: (value: string) => void;
-  options: string[];
+  selected?: string;
+  setSelected: (arg0: DifficultType) => void;
+  options: DifficultType[];
 }
 export const Dropdown: FC<Props> = ({ selected, setSelected, options }) => {
   const [isActive, setIsActive] = useState(false);
@@ -18,14 +19,14 @@ export const Dropdown: FC<Props> = ({ selected, setSelected, options }) => {
         <div className="absolute left-0 p-2 font-medium bg-white w-full border">
           {options.map((option) => (
             <div
-              key={option}
+              key={option.name}
               onClick={(e) => {
                 setSelected(option);
                 setIsActive(false);
               }}
               className="p-2 cursor-pointer transition-all	duration-300"
             >
-              {difficultNames(option)}
+              {difficultNames(option.name)}
             </div>
           ))}
         </div>

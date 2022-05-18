@@ -1,25 +1,24 @@
-import {useState} from "react";
+import {FC} from "react";
 import {Dropdown} from "../../helpers/dropdown";
-import {getDifficult} from "../../requests/requests";
-import {useAsync} from "react-async-hook";
+import {DifficultType} from "../../constants/TYPES";
 
-const Settings = () => {
-  const [difficult, setDifficult] = useState("")
-  const {result: options} = useAsync(getDifficult, [])
-
+type Props = {
+  setDifficult: (arg0: DifficultType) => void;
+  setGameStatus: (value: boolean) => void;
+  difficult?: string;
+  options: DifficultType[];
+}
+export const Settings: FC<Props> = ({setDifficult, setGameStatus, difficult, options}) => {
 
   return (
-    options ? <div className={"my-5 flex flex-row gap-10 h-12"}>
-        <Dropdown selected={difficult} setSelected={setDifficult} options={options.map((item) => item.name)}/>
-        <button
-          disabled={!difficult}
-          onClick={() => console.log("starttt")}
-          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed disabled:text-white`}
-        >Start
-        </button>
-      </div>
-      : <p>Loading...</p>
+    <div className={"my-5 flex flex-row gap-10 h-12"}>
+      <Dropdown selected={difficult} setSelected={setDifficult} options={options}/>
+      <button
+        disabled={!difficult}
+        onClick={() => setGameStatus(true)}
+        className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed disabled:text-white`}
+      >Start
+      </button>
+    </div>
   );
 };
-
-export default Settings;

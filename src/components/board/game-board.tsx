@@ -1,14 +1,14 @@
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import produce from "immer";
 import InfoBoard from "./info-board";
 
 type Props = {
   cells_count?: number
 }
-const GameBoard: FC<Props> = ({cells_count = 15}) => {
+const GameBoard: FC<Props> = ({cells_count = 3}) => {
 
   const initGrid = (count: number) => {
-    const board = Array(count)
+    return Array(count)
       // @ts-ignore
       .fill()
       .map((_, indexH) =>
@@ -21,24 +21,42 @@ const GameBoard: FC<Props> = ({cells_count = 15}) => {
               y: indexW,
               isHovered: false
             }
-            )))
-    return board
+          )))
   }
 
   const [grid, setGrid] = useState(() => initGrid(cells_count))
-  const [hoveredCells, setHoveredCells] = useState<{x: number, y: number}[]>([])
+  const [hoveredCells, setHoveredCells] = useState<{ x: number, y: number }[]>([])
 
+
+  useEffect(() => {
+    if (hoveredCells.length === cells_count * cells_count) {
+      alert("u win")
+      resetGame()
+    }
+  }, [hoveredCells])
+
+  const resetGame = () => {
+    setGrid(initGrid(cells_count))
+    setHoveredCells([])
+  }
   const onHover = (event: any, x: number, y: number) => {
     event.preventDefault()
     const updatedGrid = produce(grid, (draft) => {
       Object.assign(draft[x][y], {
-        isHovered: !draft[x][y].isHovered })
+        isHovered: !draft[x][y].isHovered
+      })
     })
     if (updatedGrid[x][y].isHovered) {
       setHoveredCells(value => [...value, {x, y}])
     }
+    if (!updatedGrid[x][y].isHovered) {
+      const index = hoveredCells.findIndex(item => item.y === y && item.x === x)  //delete unhovered cell
+      setHoveredCells([
+        ...hoveredCells.slice(0, index),
+        ...hoveredCells.slice(index + 1)
+      ])
+    }
     setGrid(updatedGrid)
-    console.log(hoveredCells, "xy")
   }
 
   return (
