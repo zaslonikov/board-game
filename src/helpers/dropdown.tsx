@@ -8,7 +8,7 @@ type Props = {
   setSelected: (arg0: DifficultType) => void;
   options: DifficultType[];
 }
-export const Dropdown: FC<Props> = ({ selected, setSelected, options }) => {
+export const Dropdown: FC<Props> = ({selected, setSelected, options}) => {
   const {gameStatus} = useContext(StatusContext);
   const [isActive, setIsActive] = useState(false);
 

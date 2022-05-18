@@ -5,7 +5,7 @@ import axios from "axios";
 
 export const getDifficult = async ():Promise<DifficultType[]> => {
   try {
-    const response = await axios.get(API.DIFFICULT)
+    const response = await axios.get(API.DIFFICULTS)
     return response.data
   } catch (error) {
     console.log(error)

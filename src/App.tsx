@@ -8,7 +8,7 @@ const App: FC = () => {
   return (
     <StatusContext.Provider value={{gameStatus, setGameStatus}}>
       <div className={""}>
-        <p className={"font-bold text-center text-red-500 my-10"}>StarNavi: Test task</p>
+        <p className={"font-bold text-center text-red-500 my-10"}>Мини игра: закрась квадратики</p>
         <Game/>
       </div>
     </StatusContext.Provider>

@@ -5,4 +5,7 @@ interface IStatusContext {
   setGameStatus: (value: boolean) => void;
 }
 
-export const StatusContext = createContext<IStatusContext>({gameStatus: false, setGameStatus: (value => {})});
+export const StatusContext = createContext<IStatusContext>({
+  gameStatus: false, setGameStatus: (value => {
+  })
+});

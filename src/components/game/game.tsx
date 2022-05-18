@@ -16,13 +16,12 @@ const Game = () => {
   return (
     <div className={"flex flex-col items-center place-content-center"}>
       {options ?
-          <Settings setDifficult={setDifficult} difficult={difficult?.name} options={options}/>
-          : <p>Загрузка данных...</p>
+        <Settings setDifficult={setDifficult} difficult={difficult?.name} options={options}/>
+        : <p>Загрузка данных...</p>
       }
-      {
-        gameStatus ?
-          <GameBoard cells_count={difficult?.field}/>
-          : null
+      {gameStatus ?
+        <GameBoard cells_count={difficult?.field}/>
+        : null
       }
     </div>
   );

@@ -10,27 +10,24 @@ type Props = {
 const GameBoard: FC<Props> = ({cells_count = 3}) => {
   const {gameStatus, setGameStatus} = useContext(StatusContext);
 
-
   const initGrid = (count: number) => {
     return Array(count)
-      // @ts-ignore
-      .fill()
+      .fill(null)
       .map((_, indexH) =>
         Array(count)
-          // @ts-ignore
-          .fill()
+          .fill(null)
           .map((_, indexW) => (
             {
               x: indexH,
               y: indexW,
               isHovered: false
             }
-          )))
+          ))
+      )
   }
 
   const [grid, setGrid] = useState(() => initGrid(cells_count))
   const [hoveredCells, setHoveredCells] = useState<{ x: number, y: number }[]>([])
-
 
   useEffect(() => {
     if (hoveredCells.length === cells_count * cells_count) {
@@ -68,7 +65,7 @@ const GameBoard: FC<Props> = ({cells_count = 3}) => {
     <div>
       {gameStatus ?
         <button
-          onClick={() => resetGame()}
+          onClick={resetGame}
           className={`bg-blue-500 hover:bg-blue-700 text-white mx-auto mb-6 flex font-bold py-2 px-4 rounded disabled:opacity-50 disabled:cursor-not-allowed disabled:text-white`}
         >Перезапустить игру
         </button>
@@ -82,20 +79,21 @@ const GameBoard: FC<Props> = ({cells_count = 3}) => {
             display: "grid",
             gridTemplateColumns: `repeat(${cells_count}, auto)`,
             gridTemplateRows: `repeat(${cells_count}, auto)`
-          }
-          }
-        >{grid.map((row: CellType[], i: number) => row.map((col: CellType, j: number) =>
-          <div
-            onMouseEnter={(e) => onHover(e, i, j)}
-            className={`border flex ${col.isHovered ? "bg-blue-200" : "bg-white"}`}
-            key={`${i}-${j}`}
-          />))}
+          }}>
+          {grid.map((row: CellType[], i: number) => row.map((col: CellType, j: number) =>
+            <div
+              onMouseEnter={(e) => onHover(e, i, j)}
+              className={`border flex ${col.isHovered ? "bg-blue-200" : "bg-white"}`}
+              key={`${i}-${j}`}
+            />)
+          )}
         </div>
         <div className={"max-h-[500px] w-[400px] overflow-auto justify-self-center"}>
           <p className={"text-center sticky top-0 border bg-yellow-200 opacity-50 py-3"}>Отмеченные клетки</p>
-          {hoveredCells.map((item) => (
-            <InfoBoard info={item}/>
-          ))}
+          {hoveredCells.map((item, index) => (
+              <InfoBoard key={`${item.y}-${index}`} info={item}/>
+            )
+          )}
         </div>
       </div>
     </div>
