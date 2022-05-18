@@ -1,6 +1,7 @@
-import {FC, useState} from "react";
+import {FC, useContext, useEffect, useLayoutEffect, useState} from "react";
 import {difficultNames} from "./parse-difficult";
 import {DifficultType} from "../constants/TYPES";
+import {StatusContext} from "../context";
 
 type Props = {
   selected?: string;
@@ -8,14 +9,22 @@ type Props = {
   options: DifficultType[];
 }
 export const Dropdown: FC<Props> = ({ selected, setSelected, options }) => {
+  const {gameStatus} = useContext(StatusContext);
   const [isActive, setIsActive] = useState(false);
+
+  useLayoutEffect(() => {
+    if (!gameStatus) {
+      setIsActive(false)
+    }
+  }, [gameStatus])
+
   return (
     <div className="w-60 select-none relative border">
       <div className="p-3 flex items-center cursor-pointer justify-between" onClick={() => setIsActive(!isActive)}>
         {selected ? difficultNames(selected) : <p className={"text-gray-500"}>Выберите сложность</p>}
         <span className="fas fa-caret-down">X</span>
       </div>
-      {isActive && (
+      {isActive && !gameStatus && (
         <div className="absolute left-0 p-2 font-medium bg-white w-full border">
           {options.map((option) => (
             <div
