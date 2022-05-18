@@ -1,7 +1,7 @@
 import {FC, useContext} from "react";
 import {Dropdown} from "../../helpers/dropdown";
 import {DifficultType} from "../../constants/TYPES";
-import {StatusContext} from "../../context";
+import {StatusContext} from "../../context/status-context";
 
 type Props = {
   setDifficult: (arg0: DifficultType) => void;

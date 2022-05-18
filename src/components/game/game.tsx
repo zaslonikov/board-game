@@ -4,7 +4,7 @@ import {getDifficult} from "../../requests/requests";
 import {Settings} from "../settings/settings";
 import GameBoard from "../board/game-board";
 import {DifficultType} from "../../constants/TYPES";
-import {StatusContext} from "../../context";
+import {StatusContext} from "../../context/status-context";
 
 
 const Game = () => {

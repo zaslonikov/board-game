@@ -1,10 +1,8 @@
 import {FC} from "react";
+import {CellType} from "../../constants/TYPES";
 
 type Props = {
-  info: {
-    x: number;
-    y: number
-  }
+  info: Omit<CellType, "isHovered">
 }
 const InfoBoard:FC<Props> = ({info}) => {
   return (

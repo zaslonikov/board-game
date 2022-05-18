@@ -1,6 +1,6 @@
 import {FC, useState} from "react";
 import Game from "./components/game/game";
-import {StatusContext} from "./context";
+import {StatusContext} from "./context/status-context";
 
 
 const App: FC = () => {

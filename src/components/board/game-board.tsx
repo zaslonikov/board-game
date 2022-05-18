@@ -1,7 +1,8 @@
 import {FC, useContext, useEffect, useState} from "react";
 import produce from "immer";
 import InfoBoard from "./info-board";
-import {StatusContext} from "../../context";
+import {StatusContext} from "../../context/status-context";
+import {CellType} from "../../constants/TYPES";
 
 type Props = {
   cells_count?: number
@@ -33,7 +34,7 @@ const GameBoard: FC<Props> = ({cells_count = 3}) => {
 
   useEffect(() => {
     if (hoveredCells.length === cells_count * cells_count) {
-      alert("u win")
+      alert(`Поздравляем вас с победой, для начала новой игры нажмите "ok" `)
       resetGame()
     }
   }, [hoveredCells])
@@ -83,7 +84,7 @@ const GameBoard: FC<Props> = ({cells_count = 3}) => {
             gridTemplateRows: `repeat(${cells_count}, auto)`
           }
           }
-        >{grid.map((row: any, i: number) => row.map((col: any, j: number) =>
+        >{grid.map((row: CellType[], i: number) => row.map((col: CellType, j: number) =>
           <div
             onMouseEnter={(e) => onHover(e, i, j)}
             className={`border flex ${col.isHovered ? "bg-blue-200" : "bg-white"}`}
