@@ -71,7 +71,7 @@ const GameBoard: FC<Props> = ({cells_count = 3}) => {
         </button>
         : null
       }
-      <div className={"grid grid-cols-2 gap-10"}>
+      <div className={"grid lg:grid-cols-2 grid-cols-1 gap-10"}>
         <div
           style={{
             width: "500px",
@@ -91,7 +91,7 @@ const GameBoard: FC<Props> = ({cells_count = 3}) => {
         <div className={"max-h-[500px] w-[400px] overflow-auto justify-self-center"}>
           <p className={"text-center sticky top-0 border bg-yellow-200 opacity-50 py-3"}>Отмеченные клетки</p>
           {hoveredCells.map((item, index) => (
-              <InfoBoard key={`${item.y}-${index}`} info={item}/>
+              <InfoBoard key={`${item.y}-${index }`} info={item}/>
             )
           )}
         </div>

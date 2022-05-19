@@ -7,8 +7,8 @@ type Props = {
 const InfoBoard:FC<Props> = ({info}) => {
   return (
       <div className={"flex flex-row justify-center gap-10 py-4 border-b"}>
-        <p>X Axis: {info.x}</p>
-        <p>Y Axis: {info.y}</p>
+        <p>X Axis: {info.x + 1}</p>
+        <p>Y Axis: {info.y + 1}</p>
       </div>
   );
 };

@@ -7,5 +7,6 @@ interface IStatusContext {
 
 export const StatusContext = createContext<IStatusContext>({
   gameStatus: false, setGameStatus: (value => {
+
   })
 });
