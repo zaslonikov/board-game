@@ -23,7 +23,7 @@ export const Dropdown: FC<Props> = ({selected, setSelected, options}) => {
     <div className="w-60 select-none relative border">
       <div className="p-3 flex items-center cursor-pointer justify-between" onClick={() => setIsActive(!isActive)}>
         {selected ? difficultNames(selected) : <p className={"text-gray-500"}>Выберите сложность</p>}
-        <span>{isActive ? "︿" : "﹀"}</span>
+        <span>{isActive && !gameStatus ? "︿" : "﹀"}</span>
       </div>
       {isActive && !gameStatus && (
         <div className="absolute left-0 p-2 font-medium bg-white w-full border">
